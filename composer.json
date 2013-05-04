@@ -1,0 +1,9 @@
+{
+    "require": {
+        "php": ">=5.4",
+        "orno/di": "1.*",
+        "orno/mvc": "dev-master",
+        "orno/loader": "1.*",
+        "orno/db": "dev-master"
+    }
+}
