@@ -1,8 +1,41 @@
 <?php
 
-// composer autoloading for vendor components
+/**
+ * -----------------------------------------------------------------------------
+ * Setup autoloading for vendor components
+ * -----------------------------------------------------------------------------
+ */
 include __DIR__ . '/../vendor/autoload.php';
 
-$config = include __DIR__ . '/../config/app.php';
+$app = new Orno\Mvc\Application;
 
-(new Orno\Mvc\Application($config))->run();
+/**
+ * -----------------------------------------------------------------------------
+ * Load modules
+ * -----------------------------------------------------------------------------
+ */
+$modules = include __DIR__ . '/../config/modules.php';
+$app->loadModules($modules);
+
+/**
+ * -----------------------------------------------------------------------------
+ * Provide configuration for application wide dependencies
+ * -----------------------------------------------------------------------------
+ */
+$dependencies = include __DIR__ . '/../config/dependencies.php';
+$app->setDependencyConfig($dependencies);
+
+/**
+ * -----------------------------------------------------------------------------
+ * Register the application autoloader and routing objects
+ * -----------------------------------------------------------------------------
+ */
+$app->registerAutoloader();
+$app->registerRouter();
+
+/**
+ * -----------------------------------------------------------------------------
+ * Let's Go!
+ * -----------------------------------------------------------------------------
+ */
+$app->run();
